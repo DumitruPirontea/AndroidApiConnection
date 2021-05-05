@@ -19,7 +19,8 @@ import javax.net.ssl.HttpsURLConnection;
 
 public class ConnectionHandler {
 
-    ArrayList<String> lista_datos = new ArrayList<String>(); //       <<<-----
+    ArrayList<Coin> lista_datos = new ArrayList<Coin>(); //       <<<-----
+    Coin coin;
 
     //---------------------Construcotr---------------
     public ConnectionHandler() {
@@ -70,7 +71,7 @@ public class ConnectionHandler {
     }
 
     //-------------------------Metodo para obtener los datos---------------------------------------
-    public ArrayList<String> getJsonData(HttpsURLConnection conn) {
+    public ArrayList<Coin> getJsonData(HttpsURLConnection conn) {
         try {
             if (conn.getResponseCode() == 200) {
 
@@ -104,33 +105,27 @@ public class ConnectionHandler {
 
 
                     // Getting JSON Array node
-                    JSONArray contacts = jsonObj.getJSONArray("result");
+                    JSONArray datos = jsonObj.getJSONArray("result");
 
 
                     // looping through All Contacts
-                    for (int i = 0; i < contacts.length(); i++) {
-                        JSONObject c = contacts.getJSONObject(i);
+                    for (int i = 0; i < datos.length(); i++) {
+                        coin = new Coin();
+                        JSONObject objetoJson = datos.getJSONObject(i);
 
-                        String number = c.getString("number");
-                        String mint = c.getString("mint");
-                        String image_obverse = c.getString("image_obverse");
-                        String image_reverse = c.getString("image_reverse");
-                        String date_in = c.getString("date_in");
-                        String date_out = c.getString("date_out");
-                        String material = c.getString("material");
-                        String denomination = c.getString("denomination");
+                        coin.setNumber(objetoJson.getString("number"));
+                        coin.setMint(objetoJson.getString("mint"));
+                        coin.setImage_obverse(objetoJson.getString("image_obverse"));
+                        coin.setImage_reverse(objetoJson.getString("image_reverse"));
+                        coin.setDate_in(objetoJson.getString("date_in"));
+                        coin.setDate_out(objetoJson.getString("date_out"));
+                        coin.setMaterial(objetoJson.getString("material"));
+                        coin.setDenomination(objetoJson.getString("denomination"));
 
-                        lista_datos.add(number);
-                        lista_datos.add(mint);
-                        lista_datos.add(image_obverse);
-                        lista_datos.add(image_reverse);
-                        lista_datos.add(date_in);
-                        lista_datos.add(date_out);
-                        lista_datos.add(material);
-                        lista_datos.add(denomination);
+                        lista_datos.add(coin);
 
 
-                        Log.d("tabla", number + " " + mint + " " + image_obverse + " " + image_reverse + " " + date_in + " " + date_out + " " + material + " " + denomination);
+                        //Log.d("tabla", number + " " + mint + " " + image_obverse + " " + image_reverse + " " + date_in + " " + date_out + " " + material + " " + denomination);
 
                     }
                 }

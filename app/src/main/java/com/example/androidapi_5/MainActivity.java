@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
     private class GetData extends AsyncTask<Void,Void,Void> {
         ConnectionHandler connectionHandler = new ConnectionHandler();
-        ArrayList<String> lista_datos = new ArrayList<String>();
+        ArrayList<Coin> lista_datos = new ArrayList<Coin>();
 
 
         public GetData() {
@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_list_item_1, lista_datos);
+            ArrayAdapter<Coin> adapter = new ArrayAdapter<Coin>(MainActivity.this, android.R.layout.simple_list_item_1, lista_datos);
             lv.setAdapter(adapter);
 
 

@@ -62,10 +62,19 @@ public class ConnectionHandler {
             os.flush();
             os.close();
 
+            String urlHost = url.getHost();
+            String urlProtocolo = url.getProtocol();
+            Log.d("HOST --->",urlHost);
+            Log.d("PROTOCOLO --->",urlProtocolo);
+
+            Log.d("HHHH----->",urlProtocolo + ":"+urlHost);
+
 
         } catch (Exception ex) {
             Log.d("Exception 1 --> ", ex.toString());
         }
+
+
 
         return conn;
     }
@@ -74,7 +83,6 @@ public class ConnectionHandler {
     public ArrayList<Coin> getJsonData(HttpsURLConnection conn) {
         try {
             if (conn.getResponseCode() == 200) {
-
 
                 InputStream in = new BufferedInputStream(conn.getInputStream());
 
@@ -115,8 +123,8 @@ public class ConnectionHandler {
 
                         coin.setNumber(objetoJson.getString("number"));
                         coin.setMint(objetoJson.getString("mint"));
-                        coin.setImage_obverse(objetoJson.getString("image_obverse"));
-                        coin.setImage_reverse(objetoJson.getString("image_reverse"));
+                        coin.setImage_obverse("https:monedaiberica.org"+objetoJson.getString("image_obverse"));
+                        coin.setImage_reverse("https:monedaiberica.org"+objetoJson.getString("image_reverse"));
                         coin.setDate_in(objetoJson.getString("date_in"));
                         coin.setDate_out(objetoJson.getString("date_out"));
                         coin.setMaterial(objetoJson.getString("material"));

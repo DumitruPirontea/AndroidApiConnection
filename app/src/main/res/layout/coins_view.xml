@@ -17,7 +17,7 @@
         tools:srcCompat="@tools:sample/avatars" />
 
     <ImageView
-        android:id="@+id/imageView2_reverse"
+        android:id="@+id/imageView_reverse"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginStart="19dp"
@@ -31,9 +31,9 @@
         android:id="@+id/textView_mint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginStart="92dp"
+        android:layout_marginLeft="92dp"
+        android:layout_marginTop="8dp"
         android:text="Mint"
         app:layout_constraintStart_toEndOf="@+id/imageView_obverse"
         app:layout_constraintTop_toTopOf="parent" />
@@ -42,8 +42,8 @@
         android:id="@+id/textView_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="69dp"
-        android:layout_marginLeft="69dp"
+        android:layout_marginStart="120dp"
+        android:layout_marginLeft="120dp"
         android:layout_marginTop="8dp"
         android:text="Number"
         app:layout_constraintStart_toEndOf="@+id/textView_mint"
@@ -64,9 +64,9 @@
         android:id="@+id/textView_date_out"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="88dp"
-        android:layout_marginLeft="88dp"
-        android:layout_marginTop="31dp"
+        android:layout_marginStart="104dp"
+        android:layout_marginLeft="104dp"
+        android:layout_marginTop="32dp"
         android:text="Date_out"
         app:layout_constraintStart_toEndOf="@+id/textView_date_in"
         app:layout_constraintTop_toBottomOf="@+id/textView_number" />
@@ -79,7 +79,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginTop="18dp"
         android:text="Material"
-        app:layout_constraintStart_toEndOf="@+id/imageView2_reverse"
+        app:layout_constraintStart_toEndOf="@+id/imageView_reverse"
         app:layout_constraintTop_toBottomOf="@+id/textView_date_in" />
 
     <TextView
@@ -90,6 +90,6 @@
         android:layout_marginLeft="8dp"
         android:layout_marginTop="32dp"
         android:text="Denomination"
-        app:layout_constraintStart_toEndOf="@+id/imageView2_reverse"
+        app:layout_constraintStart_toEndOf="@+id/imageView_reverse"
         app:layout_constraintTop_toBottomOf="@+id/textView_material" />
 </androidx.constraintlayout.widget.ConstraintLayout>

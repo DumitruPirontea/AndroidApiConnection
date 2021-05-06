@@ -15,7 +15,6 @@ import javax.net.ssl.HttpsURLConnection;
 public class MainActivity extends AppCompatActivity {
 
     ConnectionHandler connectionHandler = new ConnectionHandler();
-    GetData data;
 
     ListView lv;
 

@@ -42,7 +42,7 @@ public class ConnectionHandler {
             conn.setDoOutput(true);
             conn.setDoInput(true);
 
-            Log.d("HOLA", "HOLA");
+            Log.d("Prueba 1 --->", "Todo OK");
 
             JSONObject jsonParam = new JSONObject();
             jsonParam.put("dedalo_get", "records");
@@ -52,7 +52,7 @@ public class ConnectionHandler {
             jsonParam.put("lang", "lg-eng");
             jsonParam.put("limit", 10);
 
-            Log.d("HOLA", "HOLA");
+            Log.d("Prueba 2 --->", "Todo OK");
 
             Log.d("JSON", jsonParam.toString());
             DataOutputStream os = new DataOutputStream(conn.getOutputStream());
@@ -125,7 +125,8 @@ public class ConnectionHandler {
                         lista_datos.add(coin);
 
 
-                        //Log.d("tabla", number + " " + mint + " " + image_obverse + " " + image_reverse + " " + date_in + " " + date_out + " " + material + " " + denomination);
+                        Log.d("tabla", coin.getNumber() + " " + coin.getMint() + " " + coin.getImage_obverse() + " " + coin.getImage_reverse()
+                                + " " + coin.getDate_in() + " " + coin.getDate_out() + " " + coin.getMaterial() + " " + coin.getDenomination());
 
                     }
                 }

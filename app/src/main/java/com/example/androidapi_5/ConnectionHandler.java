@@ -62,13 +62,17 @@ public class ConnectionHandler {
             os.flush();
             os.close();
 
+            //----------------Prueba------------
             String urlHost = url.getHost();
             String urlProtocolo = url.getProtocol();
-            Log.d("HOST --->",urlHost);
+
             Log.d("PROTOCOLO --->",urlProtocolo);
+            Log.d("HOST --->",urlHost);
+
 
             Log.d("HHHH----->",urlProtocolo + ":"+urlHost);
 
+            //---------------Prueba--------------
 
         } catch (Exception ex) {
             Log.d("Exception 1 --> ", ex.toString());
@@ -103,6 +107,7 @@ public class ConnectionHandler {
                         e.printStackTrace();
                     }
                 }
+                Log.d("Prueba 3 --->", "Todo OK");
                 //-------------------
                 String jsonStr = sb.toString();
 
@@ -138,6 +143,7 @@ public class ConnectionHandler {
 
                     }
                 }
+                Log.d("Prueba 4 --->", "Todo OK");
 
             }
 

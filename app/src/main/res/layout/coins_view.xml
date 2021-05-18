@@ -69,13 +69,13 @@
         android:id="@+id/textView_date_out"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginStart="7dp"
+        android:layout_marginLeft="7dp"
+        android:layout_marginTop="10dp"
         android:text="Date_out"
         android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/textView_label_Date_out"
-        app:layout_constraintTop_toBottomOf="@+id/textView_denomination" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_date_in" />
 
     <TextView
         android:id="@+id/textView_material"
@@ -170,12 +170,25 @@
         android:id="@+id/textView_label_Date_out"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="10dp"
         android:text="DATE_OUT:"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/textView_date_in"
-        app:layout_constraintTop_toBottomOf="@+id/textView_denomination" />
+        app:layout_constraintStart_toEndOf="@+id/imageView_reverse"
+        app:layout_constraintTop_toBottomOf="@+id/textView_date_in" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="1000dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="........................................................................................................................................................."
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_label_Date_out" />
 </androidx.constraintlayout.widget.ConstraintLayout>

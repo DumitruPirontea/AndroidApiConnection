@@ -1,6 +1,5 @@
 package com.example.androidapi_5;
 
-import android.os.AsyncTask;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -29,7 +28,7 @@ public class ConnectionHandler {
 
 
     //--------------------Meotodo para la conexion-----------------------------
-    public HttpsURLConnection makeConnection() {
+    public HttpsURLConnection makeConnection(ConnectionFilter connectionFilter) {
 
         HttpsURLConnection conn = null;
 
@@ -42,19 +41,33 @@ public class ConnectionHandler {
             conn.setDoOutput(true);
             conn.setDoInput(true);
 
+            //Log.d("--->>>", String.valueOf(conn.getErrorStream()));
             Log.d("Prueba 1 --->", "Todo OK");
 
-            JSONObject jsonParam = new JSONObject();
-            jsonParam.put("dedalo_get", "records");
-            jsonParam.put("table", "coins");
-            jsonParam.put("code", "654asdiKrhdTetQksluoQaW2");
-            jsonParam.put("db_name", "web_numisdata_mib");
-            jsonParam.put("lang", "lg-eng");
-            jsonParam.put("limit", 10);
 
+            JSONObject jsonParam = new JSONObject();
+
+            jsonParam.put("dedalo_get",connectionFilter.getDedalo_get());
+            jsonParam.put("code",connectionFilter.getCode());
+            jsonParam.put("db_name",connectionFilter.getDb_name());
+            jsonParam.put("table",connectionFilter.getTable());
+            jsonParam.put("ar_fields",connectionFilter.getAr_fields());
+            jsonParam.put("section_id",connectionFilter.getSection_id());
+            jsonParam.put("sqñ_fullselect",connectionFilter.getSql_fullselect());
+            jsonParam.put("sql_filter",connectionFilter.getSql_filter());
+            jsonParam.put("lang",connectionFilter.getLang());
+            jsonParam.put("order",connectionFilter.getOrder());
+            jsonParam.put("limit",connectionFilter.getLimit());
+            jsonParam.put("group",connectionFilter.getGroup());
+            jsonParam.put("offset",connectionFilter.getOffset());
+            jsonParam.put("count",connectionFilter.isCount());
+
+
+            //Log.d("Responese code: -->", String.valueOf(conn.getResponseCode()));
             Log.d("Prueba 2 --->", "Todo OK");
 
             Log.d("JSON", jsonParam.toString());
+
             DataOutputStream os = new DataOutputStream(conn.getOutputStream());
             //os.writeBytes(URLEncoder.encode(jsonParam.toString(), "UTF-8"));
             os.writeBytes(jsonParam.toString());
@@ -62,20 +75,11 @@ public class ConnectionHandler {
             os.flush();
             os.close();
 
-            //----------------Prueba------------
-            String urlHost = url.getHost();
-            String urlProtocolo = url.getProtocol();
 
-            Log.d("PROTOCOLO --->",urlProtocolo);
-            Log.d("HOST --->",urlHost);
-
-
-            Log.d("HHHH----->",urlProtocolo + ":"+urlHost);
-
-            //---------------Prueba--------------
 
         } catch (Exception ex) {
-            Log.d("Exception 1 --> ", ex.toString());
+            //Log.d("Exception 1 --> ", ex.toString());
+            ex.printStackTrace();
         }
 
 
@@ -86,12 +90,15 @@ public class ConnectionHandler {
     //-------------------------Metodo para obtener los datos---------------------------------------
     public ArrayList<Coin> getJsonData(HttpsURLConnection conn) {
         try {
+            //Log.d("Responese code: -->", String.valueOf(conn.getResponseCode()));
             if (conn.getResponseCode() == 200) {
+
 
                 InputStream in = new BufferedInputStream(conn.getInputStream());
 
                 BufferedReader reader = new BufferedReader(new InputStreamReader(in));
                 StringBuilder sb = new StringBuilder();
+
 
                 String line;
                 try {
@@ -107,6 +114,8 @@ public class ConnectionHandler {
                         e.printStackTrace();
                     }
                 }
+
+
                 Log.d("Prueba 3 --->", "Todo OK");
                 //-------------------
                 String jsonStr = sb.toString();
@@ -137,9 +146,11 @@ public class ConnectionHandler {
 
                         lista_datos.add(coin);
 
-
-                        Log.d("tabla", coin.getNumber() + " " + coin.getMint() + " " + coin.getImage_obverse() + " " + coin.getImage_reverse()
+                        /*
+                        Log.d("tabla--------->", coin.getNumber() + " " + coin.getMint() + " " + coin.getImage_obverse() + " " + coin.getImage_reverse()
                                 + " " + coin.getDate_in() + " " + coin.getDate_out() + " " + coin.getMaterial() + " " + coin.getDenomination());
+
+                         */
 
                     }
                 }
@@ -149,7 +160,8 @@ public class ConnectionHandler {
 
 
         } catch (Exception ex) {
-            Log.d("Exception 2--> ", ex.toString());
+            ex.printStackTrace();
+            //Log.d("Exception 2--> ", ex.toString());
         }
         return lista_datos;
     }

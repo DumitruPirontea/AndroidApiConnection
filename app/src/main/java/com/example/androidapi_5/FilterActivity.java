@@ -12,8 +12,10 @@ import android.widget.Button;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -30,10 +32,9 @@ public class FilterActivity extends AppCompatActivity {
     private List<String> listaMaterial;
     private List<String> listaDenomination;
 
-    private Map<String,String> mintMap;
-    private Map<String,String> materialMap;
-    private Map<String,String> denominationMap;
-
+    private Set<String> mintFiltersSet;
+    private Set<String> materialFiltersSet;
+    private Set<String> denominationFiltersSet;
 
 
     private static String selectedMint;
@@ -61,39 +62,34 @@ public class FilterActivity extends AppCompatActivity {
 
     private void initializeFilters() {
 
-        listaDenomination = new ArrayList<>();
-        listaDenomination = new ArrayList<>();
-        listaMint = new ArrayList<>();
-
-        mintMap = new HashMap<>();
-        materialMap = new HashMap<>();
-        denominationMap = new HashMap<>();
-
-
+        mintFiltersSet = new HashSet<>();
+        materialFiltersSet = new HashSet<>();
+        denominationFiltersSet = new HashSet<>();
 
 
         List<Coin> coins = MainActivity.getCoinList();
-        for (int i = 0; i < coins.size(); i++){
-            mintMap.put("mint", coins.get(i).getMint());
-            materialMap.put("material", coins.get(i).getMaterial());
-        }
-        /*
-        for (int i = 0; i < coins.size(); i++){
-            materialMap.put("material", coins.get(i).getMaterial());
+        for (int i = 0; i < coins.size(); i++) {
+            mintFiltersSet.add(coins.get(i).getMint());
+            materialFiltersSet.add(coins.get(i).getMaterial());
+            denominationFiltersSet.add(coins.get(i).getDenomination());
+            ;
         }
 
-         */
+        listaMint = new ArrayList<>(mintFiltersSet);
+        listaMaterial = new ArrayList<>(materialFiltersSet);
+        listaDenomination = new ArrayList<>(denominationFiltersSet);
 
-        for(int i = 0; i < mintMap.size(); i++){
-            Log.d("Mint map---> ", mintMap.get("mint"));
-            Log.d("Mint map---> ", materialMap.get("material"));
+        for (int i = 0; i<listaMint.size(); i++){
+            Log.d("......>",listaMint.get(i));
         }
 
-        listaMint = getIntent().getStringArrayListExtra("mintList");
-        listaMaterial = getIntent().getStringArrayListExtra("materialList");
-        listaDenomination = getIntent().getStringArrayListExtra("denominationList");
+        for (int i = 0; i<listaMaterial.size(); i++){
+            Log.d("......>",listaMaterial.get(i));
+        }
 
-
+        for (int i = 0; i<listaDenomination.size(); i++){
+            Log.d("......>",listaDenomination.get(i));
+        }
 
 
 
@@ -119,7 +115,6 @@ public class FilterActivity extends AppCompatActivity {
         alertDialog = builder.create();
         alertDialog.show();
     }
-
 
 
     private void addListenersButtons() {
@@ -188,7 +183,7 @@ public class FilterActivity extends AppCompatActivity {
         super.onBackPressed();
     }
 
-    private  void filtrar() {
+    private void filtrar() {
         onBackPressed();
     }
 

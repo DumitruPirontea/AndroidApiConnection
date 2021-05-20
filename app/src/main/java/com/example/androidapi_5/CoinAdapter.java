@@ -18,14 +18,14 @@ import java.util.List;
 public class CoinAdapter extends RecyclerView.Adapter<CoinAdapter.MyViewHolder> {
 
     private Context mContext; //contexto
-    private List<Coin> mData; //lista monedas
+    private List<Coin> coinList; //lista monedas
 
     //-----------------------Constructor--------------------------------//
 
 
     public CoinAdapter(Context mContext, List<Coin> mData) {
         this.mContext = mContext;
-        this.mData = mData;
+        this.coinList = mData;
     }
 
     @NonNull
@@ -41,21 +41,27 @@ public class CoinAdapter extends RecyclerView.Adapter<CoinAdapter.MyViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.mint.setText(mData.get(position).getMint());
-        holder.number.setText(mData.get(position).getNumber());
-        holder.date_in.setText(mData.get(position).getDate_in());
-        holder.date_out.setText(mData.get(position).getDate_out());
-        holder.material.setText(mData.get(position).getMaterial());
-        holder.denomination.setText(mData.get(position).getDenomination());
+        holder.mint.setText(coinList.get(position).getMint());
+        holder.number.setText(coinList.get(position).getNumber());
+        holder.date_in.setText(coinList.get(position).getDate_in());
+        holder.date_out.setText(coinList.get(position).getDate_out());
+        holder.material.setText(coinList.get(position).getMaterial());
+        holder.denomination.setText(coinList.get(position).getDenomination());
 
-        Glide.with(mContext).load(mData.get(position).getImage_obverse()).into(holder.image_obverse);
-        Glide.with(mContext).load(mData.get(position).getImage_reverse()).into(holder.image_reverse);
+        Glide.with(mContext).load(coinList.get(position).getImage_obverse()).into(holder.image_obverse);
+        Glide.with(mContext).load(coinList.get(position).getImage_reverse()).into(holder.image_reverse);
 
     }
 
     @Override
     public int getItemCount() {
-        return mData.size();
+        return coinList.size();
+    }
+
+    public void refresh(List<Coin> monedasFiltradas) {
+        coinList.clear();
+        coinList.addAll(monedasFiltradas);
+        notifyDataSetChanged();
     }
 
 

@@ -16,6 +16,9 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -24,6 +27,10 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private FloatingActionButton btnFlotante;
     private static List<Coin> coinList;
+    private static List<Coin> filteredCoins;
+
+    private CoinAdapter coinAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_recyclerview);
 
         coinList = new ArrayList<>();
+        filteredCoins = new ArrayList<>();
+
         recyclerView = findViewById(R.id.recyclerView);
         btnFlotante = findViewById(R.id.floatingActionButton);
 
@@ -59,6 +68,14 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(this, "OnResume Cargado", Toast.LENGTH_SHORT).show();
         // aqui hacer que se actualice la lista de monedas cuando se devuelva un filtro.
 
+        String selectedDenomination = FilterActivity.getSelectedDenominacion();
+        String selectedMaterial = FilterActivity.getSelectedMaterial();
+        String selectedMint = FilterActivity.getSelectedMint();
+
+        Log.d("Mint>>>>", selectedMint+"");
+        Log.d("Material>>>>", selectedMaterial+"");
+        Log.d("Denomination>>>>", selectedDenomination+"");
+
     }
 
 
@@ -75,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
                 connectionFilter.setCode("654asdiKrhdTetQksluoQaW2");
                 connectionFilter.setDb_name("web_numisdata_mib"); // utilizar esta: web_numisdata_mib
                 connectionFilter.setLang("lg-eng");
-                connectionFilter.setLimit("20");
+                connectionFilter.setLimit("1000");
 
                 HttpsURLConnection conn = connectionHandler.makeConnection(connectionFilter);
                 coinList = connectionHandler.getJsonData(conn);
@@ -108,37 +125,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void goToFilters() {
         Intent intent = new Intent(this, FilterActivity.class);
-
-        ArrayList<String> listaMint = new ArrayList<>();
-        ArrayList<String> listaMaterial = new ArrayList<>();
-        ArrayList<String> listaDenomination = new ArrayList<>();
-
-        String mint = "";
-        String material = "";
-        String denomination = "";
-
-
-        for (int i = 0; i < coinList.size(); i++) {
-            mint = coinList.get(i).getMint();
-            material = coinList.get(i).getMaterial();
-            denomination = coinList.get(i).getDenomination();
-
-            Log.d("Mint--->", mint);
-            Log.d("Mat--->", material);
-            Log.d("Dem--->", denomination);
-
-            listaMint.add(mint);
-            listaMaterial.add(material);
-            listaDenomination.add(denomination);
-
-
-        }
-
-        intent.putStringArrayListExtra("mintList", listaMint);
-        intent.putStringArrayListExtra("materialList", listaMaterial);
-        intent.putStringArrayListExtra("denominationList", listaDenomination);
-
-
         startActivity(intent);
     }
 

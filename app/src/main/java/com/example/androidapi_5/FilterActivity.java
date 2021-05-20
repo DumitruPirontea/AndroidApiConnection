@@ -68,6 +68,7 @@ public class FilterActivity extends AppCompatActivity {
 
 
         List<Coin> coins = MainActivity.getCoinList();
+
         for (int i = 0; i < coins.size(); i++) {
             mintFiltersSet.add(coins.get(i).getMint());
             materialFiltersSet.add(coins.get(i).getMaterial());
@@ -79,6 +80,7 @@ public class FilterActivity extends AppCompatActivity {
         listaMaterial = new ArrayList<>(materialFiltersSet);
         listaDenomination = new ArrayList<>(denominationFiltersSet);
 
+        /*
         for (int i = 0; i<listaMint.size(); i++){
             Log.d("......>",listaMint.get(i));
         }
@@ -91,6 +93,7 @@ public class FilterActivity extends AppCompatActivity {
             Log.d("......>",listaDenomination.get(i));
         }
 
+         */
 
 
     }

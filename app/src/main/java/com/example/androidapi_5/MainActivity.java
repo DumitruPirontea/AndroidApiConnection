@@ -21,9 +21,9 @@ import javax.net.ssl.HttpsURLConnection;
 
 public class MainActivity extends AppCompatActivity {
 
-    private List<Coin> coinList;
     private RecyclerView recyclerView;
     private FloatingActionButton btnFlotante;
+    private static List<Coin> coinList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onResume(){
+    public void onResume() {
         super.onResume();
         // codigo aqui..
         Toast.makeText(this, "OnResume Cargado", Toast.LENGTH_SHORT).show();
@@ -62,52 +62,85 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-    private class Thread1 extends Thread{
+    private class Thread1 extends Thread {
         ConnectionHandler connectionHandler = new ConnectionHandler();
-        ArrayList<Coin> lista_datos = new ArrayList<Coin>();
 
         @Override
-        public void run(){
-            try{
+        public void run() {
+            try {
                 ConnectionFilter connectionFilter = new ConnectionFilter();
 
                 connectionFilter.setDedalo_get("records");
                 connectionFilter.setTable("coins");
                 connectionFilter.setCode("654asdiKrhdTetQksluoQaW2");
-                connectionFilter.setDb_name("web_numisdata_mib");
+                connectionFilter.setDb_name("web_numisdata_mib"); // utilizar esta: web_numisdata_mib
                 connectionFilter.setLang("lg-eng");
                 connectionFilter.setLimit("20");
 
-                HttpsURLConnection conn =connectionHandler.makeConnection(connectionFilter);
-                lista_datos = connectionHandler.getJsonData(conn);
+                HttpsURLConnection conn = connectionHandler.makeConnection(connectionFilter);
+                coinList = connectionHandler.getJsonData(conn);
+
+
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        PutDataIntoRecyclerView(lista_datos);
+                        PutDataIntoRecyclerView(coinList);
                     }
                 });
 
-            } catch (Exception ex){
+            } catch (Exception ex) {
                 ex.printStackTrace();
             }
         }
     }
 
 
+    public static List<Coin> getCoinList() {
+        return coinList;
+    }
 
 
-    private void PutDataIntoRecyclerView(List<Coin> listaDatos){
+    private void PutDataIntoRecyclerView(List<Coin> listaDatos) {
         CoinAdapter coinAdapter = new CoinAdapter(this, listaDatos);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(coinAdapter);
     }
 
-    private void goToFilters(){
+    private void goToFilters() {
         Intent intent = new Intent(this, FilterActivity.class);
+
+        ArrayList<String> listaMint = new ArrayList<>();
+        ArrayList<String> listaMaterial = new ArrayList<>();
+        ArrayList<String> listaDenomination = new ArrayList<>();
+
+        String mint = "";
+        String material = "";
+        String denomination = "";
+
+
+        for (int i = 0; i < coinList.size(); i++) {
+            mint = coinList.get(i).getMint();
+            material = coinList.get(i).getMaterial();
+            denomination = coinList.get(i).getDenomination();
+
+            Log.d("Mint--->", mint);
+            Log.d("Mat--->", material);
+            Log.d("Dem--->", denomination);
+
+            listaMint.add(mint);
+            listaMaterial.add(material);
+            listaDenomination.add(denomination);
+
+
+        }
+
+        intent.putStringArrayListExtra("mintList", listaMint);
+        intent.putStringArrayListExtra("materialList", listaMaterial);
+        intent.putStringArrayListExtra("denominationList", listaDenomination);
+
+
         startActivity(intent);
     }
-
 
 
 

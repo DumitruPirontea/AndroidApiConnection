@@ -29,6 +29,11 @@ public class MainActivity extends AppCompatActivity {
     private static List<Coin> coinList;
     private static List<Coin> filteredCoins;
 
+    private List<Coin> filteredCoinsMint;
+    private List<Coin> filteredCoinsMaterial;
+    private List<Coin> filteredCoinsDenomination;
+
+
     private CoinAdapter coinAdapter;
 
 
@@ -76,6 +81,85 @@ public class MainActivity extends AppCompatActivity {
         Log.d("Material>>>>", selectedMaterial+"");
         Log.d("Denomination>>>>", selectedDenomination+"");
 
+/*
+        filteredCoinsMint = new ArrayList<>();
+        filteredCoinsMaterial = new ArrayList<>();
+        filteredCoinsDenomination = new ArrayList<>();
+
+
+        filteredCoins.clear();
+
+        for(int i = 0; i < coinList.size(); i++){
+            if(coinList.get(i).getMint().equals(selectedMint)){
+                filteredCoinsMint.add(coinList.get(i));
+            } else  if(coinList.get(i).getMaterial().equals(selectedMaterial)){
+                filteredCoinsMaterial.add(coinList.get(i));
+            } else  if(coinList.get(i).getDenomination().equals(selectedDenomination)){
+                filteredCoinsDenomination.add(coinList.get(i));
+            }
+
+        }
+
+
+        for (int i = 0; i < filteredCoinsMint.size(); i++){
+            //Log.d("ListaMint filtrado = _>", String.valueOf(filteredCoinsMint.get(i)));
+            filteredCoins.add(filteredCoinsMint.get(i));
+        }
+
+
+        for (int i = 0; i < filteredCoinsMaterial.size(); i++){
+            //Log.d("ListaMaterial filtrado = _>", String.valueOf(filteredCoinsMaterial.get(i)));
+            filteredCoins.add(filteredCoinsMaterial.get(i));
+        }
+
+        for (int i = 0; i < filteredCoinsDenomination.size(); i++){
+            //Log.d("ListaDenomination filtrado = _>", String.valueOf(filteredCoinsDenomination.get(i)));
+            filteredCoins.add(filteredCoinsDenomination.get(i));
+        }
+
+        for(int i = 0; i <filteredCoins.size(); i++){
+            Log.d("Monedas filtradas---> ", filteredCoins.get(i).toString());
+        }
+
+        if (Objects.isNull(coinAdapter)) {
+            coinAdapter = new CoinAdapter(this, new ArrayList<>());
+        }
+
+        Log.d("tamaño mint-_> ", String.valueOf(filteredCoinsMint.size()));
+        Log.d("tamaño material-_> ", String.valueOf(filteredCoinsMaterial.size()));
+        Log.d("tamaño denomination-_> ", String.valueOf(filteredCoinsDenomination.size()));
+        Log.d("tamaño monedas filtradas-_> ", String.valueOf(filteredCoins.size()));
+
+ */
+
+        Predicate<Coin> denominationPredicate = Objects.isNull(selectedDenomination) ? coin -> true : coin -> coin.getDenomination().equals(selectedDenomination);
+        Predicate<Coin> mintPredicate = Objects.isNull(selectedMint) ? coin -> true : coin -> coin.getMint().equals(selectedMint);
+        Predicate<Coin> materialPredicate = Objects.isNull(selectedMaterial) ? coin -> true : coin -> coin.getMaterial().equals(selectedMaterial);
+        if (Objects.isNull(selectedDenomination) && Objects.isNull(selectedMaterial) && Objects.isNull(selectedMint)) {
+            filteredCoins.addAll(coinList);
+        } else {
+            filteredCoins.clear();
+            filteredCoins.addAll(coinList.stream()
+                    .filter(denominationPredicate.and(mintPredicate).and(materialPredicate))
+                    .collect(Collectors.toList()));
+        }
+        if (Objects.isNull(coinAdapter)) {
+            coinAdapter = new CoinAdapter(this, new ArrayList<>());
+        }
+
+
+        Log.d("tamaño monedas filtradas-_> ", String.valueOf(filteredCoins.size()));
+
+        //coinAdapter.refresh(filteredCoins);
+        PutDataIntoRecyclerView(filteredCoins);
+
+
+
+
+
+
+
+
     }
 
 
@@ -92,7 +176,7 @@ public class MainActivity extends AppCompatActivity {
                 connectionFilter.setCode("654asdiKrhdTetQksluoQaW2");
                 connectionFilter.setDb_name("web_numisdata_mib"); // utilizar esta: web_numisdata_mib
                 connectionFilter.setLang("lg-eng");
-                connectionFilter.setLimit("1000");
+                connectionFilter.setLimit("50");
 
                 HttpsURLConnection conn = connectionHandler.makeConnection(connectionFilter);
                 coinList = connectionHandler.getJsonData(conn);

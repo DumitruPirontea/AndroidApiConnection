@@ -62,6 +62,7 @@ public class CoinAdapter extends RecyclerView.Adapter<CoinAdapter.MyViewHolder> 
         coinList.clear();
         coinList.addAll(monedasFiltradas);
         notifyDataSetChanged();
+
     }
 
 

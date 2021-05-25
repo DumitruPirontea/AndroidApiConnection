@@ -139,8 +139,17 @@ public class ConnectionHandler {
                         coin.setId(objetoJson.getString("section_id"));
                         coin.setNumber(objetoJson.getString("number"));
                         coin.setMint(objetoJson.getString("mint_name")); //probar con mint o mint_name
-                        coin.setImage_obverse("https:monedaiberica.org"+objetoJson.getString("image_obverse"));
-                        coin.setImage_reverse("https:monedaiberica.org"+objetoJson.getString("image_reverse"));
+
+                        String urlImageObverse = objetoJson.getString("image_obverse");
+                        String urlImageReverse = objetoJson.getString("image_reverse");
+
+                        if(urlImageObverse.contains("http") || urlImageReverse.contains("http")){
+                            coin.setImage_obverse(objetoJson.getString("image_obverse"));
+                            coin.setImage_reverse(objetoJson.getString("image_reverse"));
+                        } else {
+                            coin.setImage_obverse("https:monedaiberica.org"+objetoJson.getString("image_obverse"));
+                            coin.setImage_reverse("https:monedaiberica.org"+objetoJson.getString("image_reverse"));
+                        }
                         coin.setDate_in(objetoJson.getString("date_in"));
                         coin.setDate_out(objetoJson.getString("date_out"));
                         coin.setMaterial(objetoJson.getString("material"));
@@ -148,9 +157,11 @@ public class ConnectionHandler {
 
                         lista_datos.add(coin);
 
-
+                        /*
                         Log.d("tabla--------->", coin.getId() + " " +coin.getNumber() + " " + coin.getMint() + " " + coin.getImage_obverse() + " " + coin.getImage_reverse()
                                 + " " + coin.getDate_in() + " " + coin.getDate_out() + " " + coin.getMaterial() + " " + coin.getDenomination());
+
+                         */
 
 
 

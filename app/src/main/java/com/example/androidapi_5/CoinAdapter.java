@@ -19,13 +19,15 @@ public class CoinAdapter extends RecyclerView.Adapter<CoinAdapter.MyViewHolder> 
 
     private Context mContext; //contexto
     private List<Coin> coinList; //lista monedas
+    private OnClickListenerCoin mOnClickListenerCoin;
 
     //-----------------------Constructor--------------------------------//
 
 
-    public CoinAdapter(Context mContext, List<Coin> mData) {
+    public CoinAdapter(Context mContext, List<Coin> coinList, OnClickListenerCoin onClickListenerCoin) {
         this.mContext = mContext;
-        this.coinList = mData;
+        this.coinList = coinList;
+        this.mOnClickListenerCoin = onClickListenerCoin;
     }
 
     @NonNull
@@ -35,7 +37,7 @@ public class CoinAdapter extends RecyclerView.Adapter<CoinAdapter.MyViewHolder> 
         LayoutInflater inflater = LayoutInflater.from(mContext);
         v = inflater.inflate(R.layout.coins_view,  parent, false);
 
-        return new MyViewHolder(v);
+        return new MyViewHolder(v, mOnClickListenerCoin);
 
     }
 
@@ -67,7 +69,7 @@ public class CoinAdapter extends RecyclerView.Adapter<CoinAdapter.MyViewHolder> 
     }
 
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder {
+    public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView id;
         TextView mint;
         TextView number;
@@ -79,8 +81,13 @@ public class CoinAdapter extends RecyclerView.Adapter<CoinAdapter.MyViewHolder> 
         ImageView image_reverse;
 
 
-        public MyViewHolder(@NonNull View itemView) {
+        OnClickListenerCoin onClickListenerCoin;
+
+        public MyViewHolder(@NonNull View itemView, OnClickListenerCoin onClickListenerCoin) {
             super(itemView);
+            this.onClickListenerCoin = onClickListenerCoin;
+
+
 
             id = itemView.findViewById(R.id.textView_ID);
             mint = itemView.findViewById(R.id.textView_mint);
@@ -92,7 +99,17 @@ public class CoinAdapter extends RecyclerView.Adapter<CoinAdapter.MyViewHolder> 
             image_obverse = itemView.findViewById(R.id.imageView_obverse);
             image_reverse = itemView.findViewById(R.id.imageView_reverse);
 
+            itemView.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View v) {
+            onClickListenerCoin.onClickCoin(getAdapterPosition());
+        }
+    }
+
+    public interface OnClickListenerCoin{
+        void onClickCoin(int position);
     }
 
 

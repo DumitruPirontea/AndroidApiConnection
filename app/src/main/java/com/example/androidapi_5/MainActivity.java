@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 
 import javax.net.ssl.HttpsURLConnection;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements CoinAdapter.OnClickListenerCoin {
 
     private RecyclerView recyclerView;
     private FloatingActionButton btnFlotante;
@@ -144,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
                     .collect(Collectors.toList()));
         }
         if (Objects.isNull(coinAdapter)) {
-            coinAdapter = new CoinAdapter(this, new ArrayList<>());
+            coinAdapter = new CoinAdapter(this, new ArrayList<>(), this);
         }
 
 
@@ -162,6 +162,63 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    //-------------------------------------------------
+    @Override
+    public void onClickCoin(int position) {
+        Intent intent = new Intent(this, CoinActivity.class);
+        //filteredCoins.get(position);
+
+        if(filteredCoins.size() != 0){
+            String id = filteredCoins.get(position).getId();
+            String number = filteredCoins.get(position).getNumber() ;
+            String mint = filteredCoins.get(position).getMint();
+            String image_obverse = filteredCoins.get(position).getImage_obverse();
+            String image_reverse = filteredCoins.get(position).getImage_reverse();
+            String date_in = filteredCoins.get(position).getDate_in();
+            String date_out = filteredCoins.get(position).getDate_out();
+            String material = filteredCoins.get(position).getMaterial();
+            String denomination = filteredCoins.get(position).getDenomination();
+
+
+            intent.putExtra("id", id);
+            intent.putExtra("number", number);
+            intent.putExtra("mint", mint);
+            intent.putExtra("image_obverse", image_obverse);
+            intent.putExtra("image_reverse", image_reverse);
+            intent.putExtra("dete_in", date_in);
+            intent.putExtra("date_out", date_out);
+            intent.putExtra("material", material);
+            intent.putExtra("denomination", denomination);
+        } else{
+            String id = coinList.get(position).getId();
+            String number = coinList.get(position).getNumber() ;
+            String mint = coinList.get(position).getMint();
+            String image_obverse = coinList.get(position).getImage_obverse();
+            String image_reverse = coinList.get(position).getImage_reverse();
+            String date_in = coinList.get(position).getDate_in();
+            String date_out = coinList.get(position).getDate_out();
+            String material = coinList.get(position).getMaterial();
+            String denomination = coinList.get(position).getDenomination();
+
+            intent.putExtra("id", id);
+            intent.putExtra("number", number);
+            intent.putExtra("mint", mint);
+            intent.putExtra("image_obverse", image_obverse);
+            intent.putExtra("image_reverse", image_reverse);
+            intent.putExtra("dete_in", date_in);
+            intent.putExtra("date_out", date_out);
+            intent.putExtra("material", material);
+            intent.putExtra("denomination", denomination);
+        }
+
+
+
+        startActivity(intent);
+
+        //Toast.makeText(this, "Se ha pulsado: "+position, Toast.LENGTH_SHORT).show();
+    }
+
+    //-----------------------------------------------------
 
     private class Thread1 extends Thread {
         ConnectionHandler connectionHandler = new ConnectionHandler();
@@ -202,7 +259,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void PutDataIntoRecyclerView(List<Coin> listaDatos) {
-        CoinAdapter coinAdapter = new CoinAdapter(this, listaDatos);
+        CoinAdapter coinAdapter = new CoinAdapter(this, listaDatos, this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(coinAdapter);
     }

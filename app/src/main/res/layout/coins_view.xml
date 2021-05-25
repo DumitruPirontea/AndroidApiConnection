@@ -21,45 +21,112 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
         android:layout_marginTop="6dp"
         android:layout_marginBottom="6dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView_obverse"
+        app:layout_constraintVertical_bias="0.085"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
-        android:id="@+id/textView_mint"
+        android:id="@+id/textView_label_Mint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="7dp"
-        android:layout_marginLeft="7dp"
-        android:layout_marginTop="16dp"
-        android:text="Mint"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="40dp"
+        android:text="MINT:"
         android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/textView_label_Mint"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/imageView_obverse"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView_material"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="24dp"
+        android:text="Material"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/textView_label_Material"
+        app:layout_constraintTop_toBottomOf="@+id/textView_mint" />
+
+    <TextView
+        android:id="@+id/textView_label_Denomination"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="8dp"
+        android:text="DENOMINATION:"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/imageView_reverse"
+        app:layout_constraintTop_toBottomOf="@+id/textView_number" />
+
+    <TextView
+        android:id="@+id/textView_label_Date_out"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="20dp"
+        android:text="DATE_OUT:"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/imageView_reverse"
+        app:layout_constraintTop_toBottomOf="@+id/textView_date_in" />
 
     <TextView
         android:id="@+id/textView_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="6dp"
-        android:layout_marginLeft="6dp"
-        android:layout_marginTop="14dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
         android:text="Number"
         android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/textView_label_Number"
         app:layout_constraintTop_toBottomOf="@+id/textView_material" />
 
     <TextView
+        android:id="@+id/textView_mint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="40dp"
+        android:text="Mint"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/textView_label_Mint"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView_label_Date_in"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="8dp"
+        android:text="DATE_IN:"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/imageView_reverse"
+        app:layout_constraintTop_toBottomOf="@+id/textView_label_Denomination" />
+
+    <TextView
+        android:id="@+id/textView_denomination"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:text="Denomination"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/textView_label_Denomination"
+        app:layout_constraintTop_toBottomOf="@+id/textView_number" />
+
+    <TextView
         android:id="@+id/textView_date_in"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="6dp"
-        android:layout_marginLeft="6dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:text="Date_in"
         android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/textView_label_Date_in"
@@ -69,46 +136,32 @@
         android:id="@+id/textView_date_out"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="7dp"
-        android:layout_marginLeft="7dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
         android:text="Date_out"
         android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/textView_label_Date_out"
         app:layout_constraintTop_toBottomOf="@+id/textView_date_in" />
 
     <TextView
-        android:id="@+id/textView_material"
+        android:id="@+id/textView_label_Material"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="12dp"
-        android:text="Material"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="24dp"
+        android:text="MATERIAL:"
         android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/textView_label_Material"
-        app:layout_constraintTop_toBottomOf="@+id/textView_mint" />
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/imageView_obverse"
+        app:layout_constraintTop_toBottomOf="@+id/textView_label_Mint" />
 
     <TextView
-        android:id="@+id/textView_denomination"
+        android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Denomination"
-        android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/textView_label_Denomination"
-        app:layout_constraintTop_toBottomOf="@+id/textView_number" />
-
-    <TextView
-        android:id="@+id/textView_label_Mint"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
-        android:text="MINT:"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="10dp"
+        android:text="ID:"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/imageView_obverse"
@@ -118,9 +171,8 @@
         android:id="@+id/textView_label_Number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="14dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
         android:text="NUMBER:"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -128,62 +180,10 @@
         app:layout_constraintTop_toBottomOf="@+id/textView_label_Material" />
 
     <TextView
-        android:id="@+id/textView_label_Material"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="12dp"
-        android:text="MATERIAL:"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/imageView_obverse"
-        app:layout_constraintTop_toBottomOf="@+id/textView_label_Mint" />
-
-    <TextView
-        android:id="@+id/textView_label_Denomination"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="6dp"
-        android:text="DENOMINATION:"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/imageView_reverse"
-        app:layout_constraintTop_toBottomOf="@+id/textView_number" />
-
-    <TextView
-        android:id="@+id/textView_label_Date_in"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="5dp"
-        android:text="DATE_IN:"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/imageView_reverse"
-        app:layout_constraintTop_toBottomOf="@+id/textView_label_Denomination" />
-
-    <TextView
-        android:id="@+id/textView_label_Date_out"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="10dp"
-        android:text="DATE_OUT:"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/imageView_reverse"
-        app:layout_constraintTop_toBottomOf="@+id/textView_date_in" />
-
-    <TextView
         android:id="@+id/textView4"
         android:layout_width="1000dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="4dp"
         android:text="........................................................................................................................................................."
         android:textColor="@android:color/holo_red_dark"
         android:textSize="20sp"
@@ -191,4 +191,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_label_Date_out" />
+
+    <TextView
+        android:id="@+id/textView_ID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="10dp"
+        android:text="ID"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/textView5"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -211,7 +211,10 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, FilterActivity.class);
         startActivity(intent);
     }
-
+    public static void removeFilters() {
+        filteredCoins.clear();
+        filteredCoins.addAll(getCoinList());
+    }
 
 
     /*

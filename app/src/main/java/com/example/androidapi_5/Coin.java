@@ -2,6 +2,7 @@ package com.example.androidapi_5;
 
 public class Coin {
 
+    private String id;
     private String number;
     private String mint;
     private String image_obverse;
@@ -16,7 +17,8 @@ public class Coin {
     public Coin() {
     }
 
-    public Coin(String number, String mint, String image_obverse, String image_reverse, String date_in, String date_out, String material, String denomination) {
+    public Coin(String id, String number, String mint, String image_obverse, String image_reverse, String date_in, String date_out, String material, String denomination) {
+        this.id = id;
         this.number = number;
         this.mint = mint;
         this.image_obverse = image_obverse;
@@ -29,6 +31,14 @@ public class Coin {
 
     //-------------------------Getters setters---------------
 
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getNumber() {
         return number;

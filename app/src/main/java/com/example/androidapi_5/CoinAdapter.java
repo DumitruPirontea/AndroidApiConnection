@@ -41,6 +41,7 @@ public class CoinAdapter extends RecyclerView.Adapter<CoinAdapter.MyViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+        holder.id.setText(coinList.get(position).getId());
         holder.mint.setText(coinList.get(position).getMint());
         holder.number.setText(coinList.get(position).getNumber());
         holder.date_in.setText(coinList.get(position).getDate_in());
@@ -67,6 +68,7 @@ public class CoinAdapter extends RecyclerView.Adapter<CoinAdapter.MyViewHolder> 
 
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
+        TextView id;
         TextView mint;
         TextView number;
         TextView date_in;
@@ -80,6 +82,7 @@ public class CoinAdapter extends RecyclerView.Adapter<CoinAdapter.MyViewHolder> 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            id = itemView.findViewById(R.id.textView_ID);
             mint = itemView.findViewById(R.id.textView_mint);
             number = itemView.findViewById(R.id.textView_number);
             date_in = itemView.findViewById(R.id.textView_date_in);

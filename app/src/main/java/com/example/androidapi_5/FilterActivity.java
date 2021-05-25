@@ -66,14 +66,12 @@ public class FilterActivity extends AppCompatActivity {
         materialFiltersSet = new HashSet<>();
         denominationFiltersSet = new HashSet<>();
 
-
         List<Coin> coins = MainActivity.getCoinList();
 
         for (int i = 0; i < coins.size(); i++) {
             mintFiltersSet.add(coins.get(i).getMint());
             materialFiltersSet.add(coins.get(i).getMaterial());
             denominationFiltersSet.add(coins.get(i).getDenomination());
-            ;
         }
 
         listaMint = new ArrayList<>(mintFiltersSet);
@@ -145,7 +143,7 @@ public class FilterActivity extends AppCompatActivity {
         btnCancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cancelar();
+                cancelar(v);
             }
         });
 
@@ -182,12 +180,20 @@ public class FilterActivity extends AppCompatActivity {
     }
 
 
-    private void cancelar() {
+    private void cancelar(View view) {
+        removeFilters();
         super.onBackPressed();
     }
 
     private void filtrar() {
         onBackPressed();
+    }
+
+    public void removeFilters() {
+        MainActivity.removeFilters();
+        selectedDenomination = null;
+        selectedMint = null;
+        selectedMaterial = null;
     }
 
 }

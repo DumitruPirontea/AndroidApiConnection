@@ -12,6 +12,13 @@ public class Coin {
     private String material;
     private String denomination;
 
+    private String colecction;
+    private String type; // esto es un array (habrá que parsear)
+
+
+
+
+
     //---------------constructor---------------
 
     public Coin() {

@@ -4,35 +4,43 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/cardview_dark_background"
     tools:context=".CoinActivity">
 
     <ImageView
         android:id="@+id/imageView_Obverse2"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="56dp"
+        android:layout_width="135dp"
+        android:layout_height="135dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="22dp"
+        android:background="@color/white"
+        android:padding="7dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView20"
         tools:srcCompat="@tools:sample/avatars" />
 
     <ImageView
         android:id="@+id/imageView_Reverse2"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginStart="68dp"
-        android:layout_marginTop="57dp"
+        android:layout_width="135dp"
+        android:layout_height="135dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="22dp"
+        android:background="@color/white"
+        android:padding="7dp"
         app:layout_constraintStart_toEndOf="@+id/imageView_Obverse2"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView20"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="49dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/white"
         android:text="Mint:"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
@@ -41,8 +49,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/white"
         android:text="Mint:"
+        android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/textView6"
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
@@ -50,9 +60,12 @@
         android:id="@+id/textView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="34dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/white"
         android:text="Number:"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
@@ -61,8 +74,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="22dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/white"
         android:text="Number:"
+        android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/textView7"
         app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
@@ -70,9 +85,12 @@
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
+        android:layout_marginStart="40dp"
         android:layout_marginTop="36dp"
+        android:textColor="@color/white"
         android:text="ID:"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView_Obverse2" />
 
@@ -80,9 +98,12 @@
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="39dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/white"
         android:text="Material:"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
@@ -91,8 +112,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="21dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/white"
         android:text="Material:"
+        android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/textView9"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
@@ -101,8 +124,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="55dp"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/white"
         android:text="Denomination:"
+        android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/textView19"
         app:layout_constraintTop_toBottomOf="@+id/textView_Material2" />
 
@@ -110,9 +135,12 @@
         android:id="@+id/textView19"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="51dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/white"
         android:text="Denomination:"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
@@ -120,9 +148,12 @@
         android:id="@+id/textView11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
+        android:layout_marginStart="40dp"
         android:layout_marginTop="14dp"
+        android:textColor="@color/white"
         android:text="Date_in:"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
@@ -131,8 +162,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="14dp"
+        android:textColor="@color/white"
         android:text="Date_in:"
+        android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/textView11"
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
@@ -141,8 +174,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
-        android:layout_marginTop="65dp"
+        android:layout_marginTop="74dp"
+        android:textColor="@color/white"
         android:text="Date_out"
+        android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/textView15"
         app:layout_constraintTop_toBottomOf="@+id/imageView_Reverse2" />
 
@@ -150,9 +185,12 @@
         android:id="@+id/textView15"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="69dp"
-        android:layout_marginTop="68dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="74dp"
+        android:textColor="@color/white"
         android:text="Date_out"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/textView_Date_in2"
         app:layout_constraintTop_toBottomOf="@+id/imageView_Reverse2" />
 
@@ -160,8 +198,9 @@
         android:id="@+id/btnVolver"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="52dp"
+        android:layout_marginStart="40dp"
         android:layout_marginBottom="4dp"
+        android:textColor="@color/white"
         android:text="Volver"
         app:icon="@drawable/abc_vector_test"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -173,7 +212,22 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="36dp"
+        android:textColor="@color/white"
         android:text="ID"
+        android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/textView8"
         app:layout_constraintTop_toBottomOf="@+id/imageView_Obverse2" />
+
+    <TextView
+        android:id="@+id/textView20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="15dp"
+        android:textColor="@color/white"
+        android:text="Detailed coin specifications"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

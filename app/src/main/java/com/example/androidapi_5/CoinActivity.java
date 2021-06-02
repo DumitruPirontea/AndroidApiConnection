@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 
 public class CoinActivity extends AppCompatActivity {
+    //Esta es la clase o "Activity" de la moneda, se cargará con una informacion especifica de cada moneda.
 
     String id;
     String number;

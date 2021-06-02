@@ -1,6 +1,7 @@
 package com.example.androidapi_5;
 
 public class Coin {
+    // clase moneda, para poder construir objetos.
 
     private String id;
     private String number;

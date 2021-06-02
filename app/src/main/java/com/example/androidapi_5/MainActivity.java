@@ -28,12 +28,6 @@ public class MainActivity extends AppCompatActivity implements CoinAdapter.OnCli
     private FloatingActionButton btnFlotante;
     private static List<Coin> coinList;
     private static List<Coin> filteredCoins;
-
-    private List<Coin> filteredCoinsMint;
-    private List<Coin> filteredCoinsMaterial;
-    private List<Coin> filteredCoinsDenomination;
-
-
     private CoinAdapter coinAdapter;
 
 
@@ -68,6 +62,8 @@ public class MainActivity extends AppCompatActivity implements CoinAdapter.OnCli
 
     @Override
     public void onResume() {
+        //sobre escribimos este metodo porque es aqui donde se retrocede al cargar la aplicacion
+
         super.onResume();
         // codigo aqui..
         Toast.makeText(this, "OnResume Cargado", Toast.LENGTH_SHORT).show();
@@ -81,63 +77,14 @@ public class MainActivity extends AppCompatActivity implements CoinAdapter.OnCli
         Log.d("Material>>>>", selectedMaterial+"");
         Log.d("Denomination>>>>", selectedDenomination+"");
 
-/*
-        filteredCoinsMint = new ArrayList<>();
-        filteredCoinsMaterial = new ArrayList<>();
-        filteredCoinsDenomination = new ArrayList<>();
-
-
-        filteredCoins.clear();
-
-        for(int i = 0; i < coinList.size(); i++){
-            if(coinList.get(i).getMint().equals(selectedMint)){
-                filteredCoinsMint.add(coinList.get(i));
-            } else  if(coinList.get(i).getMaterial().equals(selectedMaterial)){
-                filteredCoinsMaterial.add(coinList.get(i));
-            } else  if(coinList.get(i).getDenomination().equals(selectedDenomination)){
-                filteredCoinsDenomination.add(coinList.get(i));
-            }
-
-        }
-
-
-        for (int i = 0; i < filteredCoinsMint.size(); i++){
-            //Log.d("ListaMint filtrado = _>", String.valueOf(filteredCoinsMint.get(i)));
-            filteredCoins.add(filteredCoinsMint.get(i));
-        }
-
-
-        for (int i = 0; i < filteredCoinsMaterial.size(); i++){
-            //Log.d("ListaMaterial filtrado = _>", String.valueOf(filteredCoinsMaterial.get(i)));
-            filteredCoins.add(filteredCoinsMaterial.get(i));
-        }
-
-        for (int i = 0; i < filteredCoinsDenomination.size(); i++){
-            //Log.d("ListaDenomination filtrado = _>", String.valueOf(filteredCoinsDenomination.get(i)));
-            filteredCoins.add(filteredCoinsDenomination.get(i));
-        }
-
-        for(int i = 0; i <filteredCoins.size(); i++){
-            Log.d("Monedas filtradas---> ", filteredCoins.get(i).toString());
-        }
-
-        if (Objects.isNull(coinAdapter)) {
-            coinAdapter = new CoinAdapter(this, new ArrayList<>());
-        }
-
-        Log.d("tamaño mint-_> ", String.valueOf(filteredCoinsMint.size()));
-        Log.d("tamaño material-_> ", String.valueOf(filteredCoinsMaterial.size()));
-        Log.d("tamaño denomination-_> ", String.valueOf(filteredCoinsDenomination.size()));
-        Log.d("tamaño monedas filtradas-_> ", String.valueOf(filteredCoins.size()));
-
- */
-
+        // mediante un predicate se realiza el filtrado de monedas.
         Predicate<Coin> denominationPredicate = Objects.isNull(selectedDenomination) ? coin -> true : coin -> coin.getDenomination().equals(selectedDenomination);
         Predicate<Coin> mintPredicate = Objects.isNull(selectedMint) ? coin -> true : coin -> coin.getMint().equals(selectedMint);
         Predicate<Coin> materialPredicate = Objects.isNull(selectedMaterial) ? coin -> true : coin -> coin.getMaterial().equals(selectedMaterial);
         if (Objects.isNull(selectedDenomination) && Objects.isNull(selectedMaterial) && Objects.isNull(selectedMint)) {
             filteredCoins.addAll(coinList);
         } else {
+            //se vacia la lista de monedas ty se vuelve a rellenar
             filteredCoins.clear();
             filteredCoins.addAll(coinList.stream()
                     .filter(denominationPredicate.and(mintPredicate).and(materialPredicate))
@@ -154,15 +101,10 @@ public class MainActivity extends AppCompatActivity implements CoinAdapter.OnCli
         PutDataIntoRecyclerView(filteredCoins);
 
 
-
-
-
-
-
-
     }
 
-    //-------------------------------------------------
+    //-----------------------Metodo que se encarga de obtener los datos del recyclerView--------------------------
+    // lo que hace es distinguir entre que lista está cargada, obtener el indice y meter los datos en un "Intent"
     @Override
     public void onClickCoin(int position) {
         Intent intent = new Intent(this, CoinActivity.class);
@@ -220,6 +162,7 @@ public class MainActivity extends AppCompatActivity implements CoinAdapter.OnCli
 
     //-----------------------------------------------------
 
+    //con esta clase se realiza la conexion, se crea un hilo de ejecucion en segundo plano.
     private class Thread1 extends Thread {
         ConnectionHandler connectionHandler = new ConnectionHandler();
 
@@ -233,12 +176,13 @@ public class MainActivity extends AppCompatActivity implements CoinAdapter.OnCli
                 connectionFilter.setCode("654asdiKrhdTetQksluoQaW2");
                 connectionFilter.setDb_name("web_numisdata_mib"); // utilizar esta: web_numisdata_mib
                 connectionFilter.setLang("lg-eng");
-                connectionFilter.setLimit("50");
+                connectionFilter.setLimit("1000");
 
                 HttpsURLConnection conn = connectionHandler.makeConnection(connectionFilter);
                 coinList = connectionHandler.getJsonData(conn);
 
 
+                // con este metodo se accede al hilo principal para mostrar la informacion
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -258,6 +202,7 @@ public class MainActivity extends AppCompatActivity implements CoinAdapter.OnCli
     }
 
 
+    // metodo para mostrar la informacion
     private void PutDataIntoRecyclerView(List<Coin> listaDatos) {
         CoinAdapter coinAdapter = new CoinAdapter(this, listaDatos, this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

@@ -2,6 +2,8 @@ package com.example.androidapi_5;
 
 public class FilterConstants {
 
+    // constantes
+
     private FilterConstants() {
     }
 

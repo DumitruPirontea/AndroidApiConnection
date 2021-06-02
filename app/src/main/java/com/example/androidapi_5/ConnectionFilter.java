@@ -2,6 +2,8 @@ package com.example.androidapi_5;
 
 public class ConnectionFilter {
 
+    // esta clase se utiliza para crear objetos para la conexion
+
     String dedalo_get;
     String code;
     String db_name;

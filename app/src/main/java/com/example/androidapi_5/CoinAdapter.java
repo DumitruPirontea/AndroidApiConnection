@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide;
 
 import java.util.List;
 
+// esta clase se utiliza para crear la lista de monedas.
 
 public class CoinAdapter extends RecyclerView.Adapter<CoinAdapter.MyViewHolder> {
 
@@ -46,8 +47,6 @@ public class CoinAdapter extends RecyclerView.Adapter<CoinAdapter.MyViewHolder> 
         holder.id.setText(coinList.get(position).getId());
         holder.mint.setText(coinList.get(position).getMint());
         holder.number.setText(coinList.get(position).getNumber());
-        holder.date_in.setText(coinList.get(position).getDate_in());
-        holder.date_out.setText(coinList.get(position).getDate_out());
         holder.material.setText(coinList.get(position).getMaterial());
         holder.denomination.setText(coinList.get(position).getDenomination());
 
@@ -73,8 +72,6 @@ public class CoinAdapter extends RecyclerView.Adapter<CoinAdapter.MyViewHolder> 
         TextView id;
         TextView mint;
         TextView number;
-        TextView date_in;
-        TextView date_out;
         TextView material;
         TextView denomination;
         ImageView image_obverse;
@@ -87,13 +84,9 @@ public class CoinAdapter extends RecyclerView.Adapter<CoinAdapter.MyViewHolder> 
             super(itemView);
             this.onClickListenerCoin = onClickListenerCoin;
 
-
-
             id = itemView.findViewById(R.id.textView_ID);
             mint = itemView.findViewById(R.id.textView_mint);
             number = itemView.findViewById(R.id.textView_number);
-            date_in = itemView.findViewById(R.id.textView_date_in);
-            date_out = itemView.findViewById(R.id.textView_date_out);
             material = itemView.findViewById(R.id.textView_material);
             denomination = itemView.findViewById(R.id.textView_denomination);
             image_obverse = itemView.findViewById(R.id.imageView_obverse);

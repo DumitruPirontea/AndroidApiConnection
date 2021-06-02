@@ -65,18 +65,6 @@
         app:layout_constraintTop_toBottomOf="@+id/textView_number" />
 
     <TextView
-        android:id="@+id/textView_label_Date_out"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="20dp"
-        android:text="@string/date_out"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/imageView_reverse"
-        app:layout_constraintTop_toBottomOf="@+id/textView_date_in" />
-
-    <TextView
         android:id="@+id/textView_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -99,49 +87,15 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView_label_Date_in"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/date_in"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/imageView_reverse"
-        app:layout_constraintTop_toBottomOf="@+id/textView_label_Denomination" />
-
-    <TextView
         android:id="@+id/textView_denomination"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="8dp"
         android:text="Denomination"
         android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/textView_label_Denomination"
         app:layout_constraintTop_toBottomOf="@+id/textView_number" />
-
-    <TextView
-        android:id="@+id/textView_date_in"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Date_in"
-        android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/textView_label_Date_in"
-        app:layout_constraintTop_toBottomOf="@+id/textView_label_Denomination" />
-
-    <TextView
-        android:id="@+id/textView_date_out"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
-        android:text="Date_out"
-        android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/textView_label_Date_out"
-        app:layout_constraintTop_toBottomOf="@+id/textView_date_in" />
 
     <TextView
         android:id="@+id/textView_label_Material"
@@ -183,14 +137,14 @@
         android:id="@+id/textView4"
         android:layout_width="1000dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="8dp"
         android:text="........................................................................................................................................................."
         android:textColor="@android:color/holo_red_dark"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_label_Date_out" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView_reverse" />
 
     <TextView
         android:id="@+id/textView_ID"

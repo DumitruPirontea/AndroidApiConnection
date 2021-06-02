@@ -18,8 +18,12 @@ import java.util.List;
 import javax.net.ssl.HttpsURLConnection;
 
 public class ConnectionHandler {
+    /*
+    Clase encargada para hacer la conexion a la API
+     */
 
-    List<Coin> lista_datos = new ArrayList<Coin>(); //       <<<-----
+
+    List<Coin> lista_datos = new ArrayList<Coin>();
     Coin coin;
 
     //---------------------Construcotr---------------
@@ -34,6 +38,7 @@ public class ConnectionHandler {
         HttpsURLConnection conn = null;
 
         try {
+            // definimos URL y tipo de conexion
             URL url = new URL("https://monedaiberica.org/dedalo/lib/dedalo/publication/server_api/v1/json/");
             conn = (HttpsURLConnection) url.openConnection();
             conn.setRequestMethod("POST");
@@ -42,10 +47,9 @@ public class ConnectionHandler {
             conn.setDoOutput(true);
             conn.setDoInput(true);
 
-            //Log.d("--->>>", String.valueOf(conn.getErrorStream()));
             Log.d("Prueba 1 --->", "Todo OK");
 
-
+            // cargamos los parametros que se pasará a la API dentro de un JSON
             JSONObject jsonParam = new JSONObject();
 
             jsonParam.put("dedalo_get",connectionFilter.getDedalo_get());
@@ -69,10 +73,12 @@ public class ConnectionHandler {
 
             Log.d("JSON", jsonParam.toString());
 
+            // emviamos el JSON a la API.
             DataOutputStream os = new DataOutputStream(conn.getOutputStream());
             //os.writeBytes(URLEncoder.encode(jsonParam.toString(), "UTF-8"));
             os.writeBytes(jsonParam.toString());
 
+            // limpiamos canasles y cerramos flujos de datos
             os.flush();
             os.close();
 
@@ -83,8 +89,6 @@ public class ConnectionHandler {
             ex.printStackTrace();
         }
 
-
-
         return conn;
     }
 
@@ -94,9 +98,10 @@ public class ConnectionHandler {
             //Log.d("Responese code: -->", String.valueOf(conn.getResponseCode()));
             if (conn.getResponseCode() == 200) {
 
-
+                // obtenemos el resultado de la conexion
                 InputStream in = new BufferedInputStream(conn.getInputStream());
 
+                // lo guardamos todo dentro de un string
                 BufferedReader reader = new BufferedReader(new InputStreamReader(in));
                 StringBuilder sb = new StringBuilder();
 
@@ -118,20 +123,21 @@ public class ConnectionHandler {
 
 
                 Log.d("Prueba 3 --->", "Todo OK");
-                //-------------------
+                // lo guardamos todo dentro de un JSON
                 String jsonStr = sb.toString();
 
                 Log.d("RESPUESTA", "Response from url: " + jsonStr);
+
                 if (jsonStr != null) {
                     JSONObject jsonObj = new JSONObject(jsonStr);
                     Log.d("JSON", String.valueOf(jsonObj));
 
 
-                    // Getting JSON Array node
+                    // Obtenemos la informacion del JSON (accedemos al nodo principal)
                     JSONArray datos = jsonObj.getJSONArray("result");
 
 
-                    // looping through All Contacts
+                    // bucle para sacar todos los datos (se guardan en una lista)
                     for (int i = 0; i < datos.length(); i++) {
                         coin = new Coin();
                         JSONObject objetoJson = datos.getJSONObject(i);
@@ -162,12 +168,6 @@ public class ConnectionHandler {
                                 + " " + coin.getDate_in() + " " + coin.getDate_out() + " " + coin.getMaterial() + " " + coin.getDenomination());
 
                          */
-
-
-
-
-
-
                     }
                 }
                 Log.d("Prueba 4 --->", "Todo OK");

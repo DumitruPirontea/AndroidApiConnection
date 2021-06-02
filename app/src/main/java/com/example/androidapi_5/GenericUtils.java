@@ -2,6 +2,8 @@ package com.example.androidapi_5;
 
 import com.google.gson.Gson;
 
+// para serialziar (no se ha usado)
+
 public class GenericUtils {
 
     public static <T> String serialize(T object) {

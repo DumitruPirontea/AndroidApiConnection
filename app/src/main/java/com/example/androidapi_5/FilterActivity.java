@@ -22,11 +22,14 @@ import javax.net.ssl.HttpsURLConnection;
 
 public class FilterActivity extends AppCompatActivity {
 
+    // esta clase va ligada a la pestaña donde se seleccionan los filtros.
+
     private Button btnMint;
     private Button btnMaterial;
     private Button btnDenomination;
     private Button btnCancelar;
     private Button btnAplicarFiltro;
+    private Button btnBorrarFiltros;
 
     private List<String> listaMint;
     private List<String> listaMaterial;
@@ -55,11 +58,13 @@ public class FilterActivity extends AppCompatActivity {
         btnDenomination = findViewById(R.id.btnFiltrarPorDenomination);
         btnCancelar = findViewById(R.id.btnCancelar);
         btnAplicarFiltro = findViewById(R.id.btnAplicarFiltros);
+        btnBorrarFiltros = findViewById(R.id.btnRemoveFilters);
 
         addListenersButtons();
 
     }
 
+    //-------------------metodo para iniciar filtros
     private void initializeFilters() {
 
         mintFiltersSet = new HashSet<>();
@@ -78,24 +83,9 @@ public class FilterActivity extends AppCompatActivity {
         listaMaterial = new ArrayList<>(materialFiltersSet);
         listaDenomination = new ArrayList<>(denominationFiltersSet);
 
-        /*
-        for (int i = 0; i<listaMint.size(); i++){
-            Log.d("......>",listaMint.get(i));
-        }
-
-        for (int i = 0; i<listaMaterial.size(); i++){
-            Log.d("......>",listaMaterial.get(i));
-        }
-
-        for (int i = 0; i<listaDenomination.size(); i++){
-            Log.d("......>",listaDenomination.get(i));
-        }
-
-         */
-
-
     }
 
+    //-----------------Metodo para mostrar lista de filtros con "AlertDialog"
     private void showOptions(List<String> filters, String filter) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         String[] arraydatos = filters.toArray(new String[0]);
@@ -117,6 +107,7 @@ public class FilterActivity extends AppCompatActivity {
         alertDialog.show();
     }
 
+    //-------- on click listeners
 
     private void addListenersButtons() {
         btnMint.setOnClickListener(new View.OnClickListener() {
@@ -153,6 +144,14 @@ public class FilterActivity extends AppCompatActivity {
                 filtrar();
             }
         });
+
+        btnBorrarFiltros.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                removeFilters();
+            }
+        });
+
     }
 
     public static String getSelectedMint() {
@@ -179,6 +178,7 @@ public class FilterActivity extends AppCompatActivity {
         FilterActivity.selectedMaterial = selectedMaterial;
     }
 
+// otros metodos
 
     private void cancelar(View view) {
         removeFilters();

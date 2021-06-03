@@ -14,9 +14,9 @@ public class ConnectionFilter {
     String sql_filter;
     String lang;
     String order;
-    String limit;
+    int limit;
     String group;
-    String offset;
+    int offset;
     boolean count;
 
     //-------------------------------------------------------//
@@ -102,11 +102,11 @@ public class ConnectionFilter {
         this.order = order;
     }
 
-    public String getLimit() {
+    public int getLimit() {
         return limit;
     }
 
-    public void setLimit(String limit) {
+    public void setLimit(int limit) {
         this.limit = limit;
     }
 
@@ -118,11 +118,11 @@ public class ConnectionFilter {
         this.group = group;
     }
 
-    public String getOffset() {
+    public int getOffset() {
         return offset;
     }
 
-    public void setOffset(String offset) {
+    public void setOffset(int offset) {
         this.offset = offset;
     }
 

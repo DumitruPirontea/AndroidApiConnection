@@ -2,6 +2,7 @@ package com.example.androidapi_5;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -34,6 +35,7 @@ public class CoinActivity extends AppCompatActivity {
     ImageView iv_image_reverse;
 
     private Button btnGoBack;
+    private String offeset;
 
 
     @Override
@@ -61,6 +63,8 @@ public class CoinActivity extends AppCompatActivity {
             }
         });
 
+
+
     }
 
 
@@ -86,9 +90,16 @@ public class CoinActivity extends AppCompatActivity {
 
         Glide.with(this).load(image_obverse).into(iv_image_obverse);
         Glide.with(this).load(image_reverse).into(iv_image_reverse);
+
+        offeset = getIntent().getStringExtra("offset");
     }
 
     private void goBack(){
+        //Intent intent = new Intent(this, MainActivity.class);
+        //intent.putExtra("offset",offeset);
+        //startActivity(intent);
+
+
         super.onBackPressed();
     }
 

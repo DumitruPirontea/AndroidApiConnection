@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.icu.text.UnicodeSetSpanner;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -31,6 +32,15 @@ public class MainActivity extends AppCompatActivity implements CoinAdapter.OnCli
     private CoinAdapter coinAdapter;
 
 
+    FloatingActionButton floatingButtonPrevious;
+    FloatingActionButton floatingButtonNext;
+    private int totalCoins;
+    private int counterLimit = 10;
+    private int offest = 0; // cogerlo de la coin activity
+    private String offset2;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +51,18 @@ public class MainActivity extends AppCompatActivity implements CoinAdapter.OnCli
 
         recyclerView = findViewById(R.id.recyclerView);
         btnFlotante = findViewById(R.id.floatingActionButton);
+
+        floatingButtonPrevious = findViewById(R.id.floatingButtonPrevious);
+        floatingButtonNext = findViewById(R.id.floatingButtonNext);
+
+        //--------------------
+        offset2 = getIntent().getStringExtra("offset");
+        if(offset2 == null){
+
+        } else {
+            offest = Integer.parseInt(offset2);
+        }
+        //--------------------
 
         /*
         GetData getData = new GetData();
@@ -57,14 +79,18 @@ public class MainActivity extends AppCompatActivity implements CoinAdapter.OnCli
             }
         });
 
-
+        setBtnListeners();
     }
 
     @Override
     public void onResume() {
         //sobre escribimos este metodo porque es aqui donde se retrocede al cargar la aplicacion
 
+        //coinList = getCoinList();
+
         super.onResume();
+
+
         // codigo aqui..
         Toast.makeText(this, "OnResume Cargado", Toast.LENGTH_SHORT).show();
         // aqui hacer que se actualice la lista de monedas cuando se devuelva un filtro.
@@ -82,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements CoinAdapter.OnCli
         Predicate<Coin> mintPredicate = Objects.isNull(selectedMint) ? coin -> true : coin -> coin.getMint().equals(selectedMint);
         Predicate<Coin> materialPredicate = Objects.isNull(selectedMaterial) ? coin -> true : coin -> coin.getMaterial().equals(selectedMaterial);
         if (Objects.isNull(selectedDenomination) && Objects.isNull(selectedMaterial) && Objects.isNull(selectedMint)) {
-            filteredCoins.addAll(coinList);
+            //filteredCoins.addAll(coinList); // problema aqui
         } else {
             //se vacia la lista de monedas ty se vuelve a rellenar
             filteredCoins.clear();
@@ -90,15 +116,21 @@ public class MainActivity extends AppCompatActivity implements CoinAdapter.OnCli
                     .filter(denominationPredicate.and(mintPredicate).and(materialPredicate))
                     .collect(Collectors.toList()));
         }
+
         if (Objects.isNull(coinAdapter)) {
             coinAdapter = new CoinAdapter(this, new ArrayList<>(), this);
         }
 
-
         Log.d("tamaño monedas filtradas-_> ", String.valueOf(filteredCoins.size()));
 
         //coinAdapter.refresh(filteredCoins);
-        PutDataIntoRecyclerView(filteredCoins);
+
+        if(filteredCoins.size() != 0){
+            PutDataIntoRecyclerView(filteredCoins);
+        } else {
+            PutDataIntoRecyclerView(coinList);
+        }
+
 
 
     }
@@ -108,7 +140,8 @@ public class MainActivity extends AppCompatActivity implements CoinAdapter.OnCli
     @Override
     public void onClickCoin(int position) {
         Intent intent = new Intent(this, CoinActivity.class);
-        //filteredCoins.get(position);
+         Log.d("POSICION CLICK -->",position+"");
+
 
         if(filteredCoins.size() != 0){
             String id = filteredCoins.get(position).getId();
@@ -121,6 +154,7 @@ public class MainActivity extends AppCompatActivity implements CoinAdapter.OnCli
             String material = filteredCoins.get(position).getMaterial();
             String denomination = filteredCoins.get(position).getDenomination();
 
+            Log.d("Moneda...>", filteredCoins.get(position).toString());
 
             intent.putExtra("id", id);
             intent.putExtra("number", number);
@@ -131,7 +165,10 @@ public class MainActivity extends AppCompatActivity implements CoinAdapter.OnCli
             intent.putExtra("date_out", date_out);
             intent.putExtra("material", material);
             intent.putExtra("denomination", denomination);
-        } else{
+
+            intent.putExtra("offset", offest+"");
+
+        } else if(coinList.size() != 0){
             String id = coinList.get(position).getId();
             String number = coinList.get(position).getNumber() ;
             String mint = coinList.get(position).getMint();
@@ -142,6 +179,9 @@ public class MainActivity extends AppCompatActivity implements CoinAdapter.OnCli
             String material = coinList.get(position).getMaterial();
             String denomination = coinList.get(position).getDenomination();
 
+            Log.d("Moneda...>", coinList.get(position).toString());
+
+
             intent.putExtra("id", id);
             intent.putExtra("number", number);
             intent.putExtra("mint", mint);
@@ -151,13 +191,12 @@ public class MainActivity extends AppCompatActivity implements CoinAdapter.OnCli
             intent.putExtra("date_out", date_out);
             intent.putExtra("material", material);
             intent.putExtra("denomination", denomination);
+
+            intent.putExtra("offset", offest+"");
+
         }
 
-
-
         startActivity(intent);
-
-        //Toast.makeText(this, "Se ha pulsado: "+position, Toast.LENGTH_SHORT).show();
     }
 
     //-----------------------------------------------------
@@ -176,11 +215,15 @@ public class MainActivity extends AppCompatActivity implements CoinAdapter.OnCli
                 connectionFilter.setCode("654asdiKrhdTetQksluoQaW2");
                 connectionFilter.setDb_name("web_numisdata_mib"); // utilizar esta: web_numisdata_mib
                 connectionFilter.setLang("lg-eng");
-                connectionFilter.setLimit("1000");
-
+                connectionFilter.setOrder("section_id ASC");
+                connectionFilter.setLimit(counterLimit);
+                connectionFilter.setOffset(offest);
                 HttpsURLConnection conn = connectionHandler.makeConnection(connectionFilter);
+                Log.d("Lista-->", coinList.toString());
+                coinList.removeAll(coinList);
+                Log.d("Lista borr->", coinList.toString());
                 coinList = connectionHandler.getJsonData(conn);
-
+                Log.d("Lista-- Carr>", coinList.toString());
 
                 // con este metodo se accede al hilo principal para mostrar la informacion
                 runOnUiThread(new Runnable() {
@@ -193,6 +236,10 @@ public class MainActivity extends AppCompatActivity implements CoinAdapter.OnCli
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
+        }
+
+        public List<Coin> getCoinList(){
+            return  coinList;
         }
     }
 
@@ -216,6 +263,32 @@ public class MainActivity extends AppCompatActivity implements CoinAdapter.OnCli
     public static void removeFilters() {
         filteredCoins.clear();
         filteredCoins.addAll(getCoinList());
+    }
+
+
+    public void setBtnListeners(){
+        floatingButtonPrevious.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(offest == 0){
+                    return;
+                }
+                offest -= 10;
+
+                new Thread1().start();
+            }
+        });
+
+        floatingButtonNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                offest += 10;
+
+                new Thread1().start();
+
+            }
+        });
+
     }
 
 

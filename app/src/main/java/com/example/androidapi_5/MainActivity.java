@@ -91,6 +91,7 @@ public class MainActivity extends AppCompatActivity implements CoinAdapter.OnCli
         super.onResume();
 
 
+
         // codigo aqui..
         Toast.makeText(this, "OnResume Cargado", Toast.LENGTH_SHORT).show();
         // aqui hacer que se actualice la lista de monedas cuando se devuelva un filtro.
@@ -109,12 +110,23 @@ public class MainActivity extends AppCompatActivity implements CoinAdapter.OnCli
         Predicate<Coin> materialPredicate = Objects.isNull(selectedMaterial) ? coin -> true : coin -> coin.getMaterial().equals(selectedMaterial);
         if (Objects.isNull(selectedDenomination) && Objects.isNull(selectedMaterial) && Objects.isNull(selectedMint)) {
             //filteredCoins.addAll(coinList); // problema aqui
+            floatingButtonPrevious.setEnabled(true);
+            floatingButtonNext.setEnabled(true);
+            floatingButtonNext.setVisibility(View.VISIBLE);
+            floatingButtonPrevious.setVisibility(View.VISIBLE);
+
         } else {
             //se vacia la lista de monedas ty se vuelve a rellenar
             filteredCoins.clear();
             filteredCoins.addAll(coinList.stream()
                     .filter(denominationPredicate.and(mintPredicate).and(materialPredicate))
                     .collect(Collectors.toList()));
+
+            floatingButtonNext.setEnabled(false);
+            floatingButtonPrevious.setEnabled(false);
+            floatingButtonNext.setVisibility(View.INVISIBLE);
+            floatingButtonPrevious.setVisibility(View.INVISIBLE);
+
         }
 
         if (Objects.isNull(coinAdapter)) {

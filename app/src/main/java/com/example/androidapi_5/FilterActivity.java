@@ -181,7 +181,6 @@ public class FilterActivity extends AppCompatActivity {
 // otros metodos
 
     private void cancelar(View view) {
-        removeFilters();
         super.onBackPressed();
     }
 

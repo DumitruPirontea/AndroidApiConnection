@@ -114,6 +114,7 @@ public class MainActivity extends AppCompatActivity implements CoinAdapter.OnCli
             floatingButtonNext.setEnabled(true);
             floatingButtonNext.setVisibility(View.VISIBLE);
             floatingButtonPrevious.setVisibility(View.VISIBLE);
+            PutDataIntoRecyclerView(coinList); //>>
 
         } else {
             //se vacia la lista de monedas ty se vuelve a rellenar

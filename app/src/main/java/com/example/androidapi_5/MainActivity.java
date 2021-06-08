@@ -108,13 +108,18 @@ public class MainActivity extends AppCompatActivity implements CoinAdapter.OnCli
         Predicate<Coin> denominationPredicate = Objects.isNull(selectedDenomination) ? coin -> true : coin -> coin.getDenomination().equals(selectedDenomination);
         Predicate<Coin> mintPredicate = Objects.isNull(selectedMint) ? coin -> true : coin -> coin.getMint().equals(selectedMint);
         Predicate<Coin> materialPredicate = Objects.isNull(selectedMaterial) ? coin -> true : coin -> coin.getMaterial().equals(selectedMaterial);
+
         if (Objects.isNull(selectedDenomination) && Objects.isNull(selectedMaterial) && Objects.isNull(selectedMint)) {
             //filteredCoins.addAll(coinList); // problema aqui
+            filteredCoins.clear();
             floatingButtonPrevious.setEnabled(true);
             floatingButtonNext.setEnabled(true);
             floatingButtonNext.setVisibility(View.VISIBLE);
             floatingButtonPrevious.setVisibility(View.VISIBLE);
-            PutDataIntoRecyclerView(coinList); //>>
+
+
+            PutDataIntoRecyclerView(coinList);
+            Log.d("HH","HH");
 
         } else {
             //se vacia la lista de monedas ty se vuelve a rellenar
@@ -128,6 +133,8 @@ public class MainActivity extends AppCompatActivity implements CoinAdapter.OnCli
             floatingButtonNext.setVisibility(View.INVISIBLE);
             floatingButtonPrevious.setVisibility(View.INVISIBLE);
 
+
+            Log.d("AA","AA");
         }
 
         if (Objects.isNull(coinAdapter)) {
